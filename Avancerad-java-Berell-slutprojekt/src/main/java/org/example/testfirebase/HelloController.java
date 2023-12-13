@@ -3,29 +3,32 @@ package org.example.testfirebase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import java.util.Scanner;
+import static javafx.scene.image.Image.*;
+import static org.example.testfirebase.HelloApplication.databaseUrl;
+import static org.example.testfirebase.HelloApplication.putRequest;
 
-import static org.example.testfirebase.HelloApplication.*;
+public class HelloController {
 
-public class HelloController extends HelloApplication {
-
-    @FXML
-    public static TextField inputTextField;
-
-    @FXML
-    private Button skicka;
+    public TextArea outputTextArea;
 
     @FXML
-    private Label welcomeText;
-    public Scanner scan;
+    private Button start;
+    @FXML
+    private Button stop;
+    @FXML
+    private ImageView imageView;
 
     @FXML
-    void onSkickaButtonClick(ActionEvent event) {
+    void onstartButtonClick(ActionEvent event) {
         putRequest("person.json");
-        scan = new Scanner(System.in);
-        dataMap.put(String.valueOf(scan), inputTextField);
     }
+    @FXML
+    void onstopButtonClick(ActionEvent event) {
+    }
+
 }
+

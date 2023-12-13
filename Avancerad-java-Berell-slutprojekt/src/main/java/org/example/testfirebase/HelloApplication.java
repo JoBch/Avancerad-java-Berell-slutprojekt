@@ -1,36 +1,23 @@
 package org.example.testfirebase;
+
 import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class HelloApplication extends Application {
     public static HashMap<String, Object> dataMap;
     static String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public static void main(String[] args) throws IOException {
 /*
@@ -51,12 +38,13 @@ public class HelloApplication extends Application {
         JsonObject root = parser.parse(response.toString()).getAsJsonObject();
         System.out.println(root.get("fact").getAsString());*/
 
-        firebaseRequests("person.json");
-        putRequest("person.json");
-        launch();
+        firebaseRequests("person.json"); //Om vi ska använda firebase så ändra dessa
+        putRequest("person.json");   //Om vi ska använda firebase så ändra dessa
+        launch(); //Launches our JavaFX
     }
 
-    public static void firebaseRequests(String databasePath){
+    //Requests data from the supplied firebase URL and prints it in console
+    public static void firebaseRequests(String databasePath) {
         String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
 
         try {
@@ -71,7 +59,7 @@ public class HelloApplication extends Application {
 
             // Get the response code t.ex 400, 404, 200 är ok
             int responseCode = connection.getResponseCode();
-            System.out.println("response code:" +responseCode);
+            System.out.println("response code:" + responseCode);
             if (responseCode == HttpURLConnection.HTTP_OK) { // ok är bra
                 // Read the response from the InputStream
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -96,12 +84,10 @@ public class HelloApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-
+    //Puts data in firebase by the help of the dataMap, maybe get this to work with JavaFX?
     public static void putRequest(String databasePath) {
-
 
         try {
             URL url = new URL(databaseUrl + databasePath);
@@ -145,5 +131,14 @@ public class HelloApplication extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 300);
+        stage.setTitle("Welcome to our Trivia game!");
+        stage.setScene(scene);
+        stage.show();
     }
 }
