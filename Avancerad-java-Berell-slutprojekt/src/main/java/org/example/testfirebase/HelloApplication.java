@@ -5,14 +5,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.Scanner;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class HelloApplication extends Application {
     public static HashMap<String, Object> dataMap;
@@ -28,17 +33,24 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-/*        URL joke = new URL("https://official-joke-api.appspot.com/jokes/programming/random");
-        //URL joke = new URL("https://mobilt-java-22-default-rtdb.europe-west1.firebasedatabase.app/");
-        URLConnection yc = joke.openConnection();
-        BufferedReader in = new BufferedReader( new InputStreamReader(yc.getInputStream()));
-        String inputLine;
-        do {
-            inputLine = in.readLine();
-            System.out.println(inputLine);
+/*
+        URL url = new URL("https://opentdb.com/api.php?amount=10&category=26&difficulty=medium&type=boolean");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("accept", "application/json");
+
+        InputStream responseStream = connection.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream));
+        StringBuilder response = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
         }
-        while (inputLine  != null);
-        in.close();*/
+        reader.close();
+
+        JsonParser parser = new JsonParser();
+        JsonObject root = parser.parse(response.toString()).getAsJsonObject();
+        System.out.println(root.get("fact").getAsString());*/
+
         firebaseRequests("person.json");
         putRequest("person.json");
         launch();
