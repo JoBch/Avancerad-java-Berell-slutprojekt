@@ -4,6 +4,10 @@ import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -14,8 +18,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class HelloApplication extends Application {
+    public static TextArea outputTextArea;
     public static HashMap<String, Object> dataMap;
     static String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
 
@@ -134,11 +140,26 @@ public class HelloApplication extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 300);
         stage.setTitle("Welcome to our Trivia game!");
         stage.setScene(scene);
+
+
+
+        //Dialog with a confirmation request - use to input playername and start game after countdown 5 sec?
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Text Input Dialog");
+        dialog.setHeaderText("Look, a Text Input Dialog");
+        dialog.setContentText("Please enter your name:");
+
+        // Traditional way to get the response value.
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                Thread.sleep(2000);//program pauses before continuing
+                System.out.println("Your name: " + result.get());
+            }
         stage.show();
     }
 }

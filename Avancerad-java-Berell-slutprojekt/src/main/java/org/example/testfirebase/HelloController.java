@@ -2,10 +2,11 @@ package org.example.testfirebase;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.util.Optional;
 
 import static javafx.scene.image.Image.*;
 import static org.example.testfirebase.HelloApplication.databaseUrl;
@@ -22,12 +23,16 @@ public class HelloController {
     @FXML
     private ImageView imageView;
 
+
+
     @FXML
-    void onstartButtonClick(ActionEvent event) {
-        putRequest("person.json");
+    void onstartButtonClick(ActionEvent event) throws InterruptedException {
+        //putRequest("person.json");
+        //Countdown for start of quiz show it in
     }
     @FXML
     void onstopButtonClick(ActionEvent event) {
+        outputTextArea.appendText("Because he is poopoo");
     }
 
 }
