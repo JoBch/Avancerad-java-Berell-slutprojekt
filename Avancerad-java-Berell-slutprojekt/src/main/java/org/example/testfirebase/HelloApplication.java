@@ -1,6 +1,8 @@
 package org.example.testfirebase;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,10 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -22,12 +21,12 @@ import java.util.Optional;
 
 public class HelloApplication extends Application {
     public static TextArea outputTextArea;
+
     public static HashMap<String, Object> dataMap;
-    static String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
+    static String databaseUrl = "https://opentdb.com/api.php?amount=1";
 
     public static void main(String[] args) throws IOException {
-/*
-        URL url = new URL("https://opentdb.com/api.php?amount=10&category=26&difficulty=medium&type=boolean");
+        /*URL url = new URL("https://opentdb.com/api.php?amount=1");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestProperty("accept", "application/json");
 
@@ -39,13 +38,14 @@ public class HelloApplication extends Application {
             response.append(line);
         }
         reader.close();
-
-        JsonParser parser = new JsonParser();
+        //JsonParser parse = new JsonParser();
+        JsonParser parser = null;
         JsonObject root = parser.parse(response.toString()).getAsJsonObject();
         System.out.println(root.get("fact").getAsString());*/
 
-        firebaseRequests("person.json"); //Om vi ska använda firebase så ändra dessa
-        putRequest("person.json");   //Om vi ska använda firebase så ändra dessa
+        //firebaseRequests("person.json"); //Om vi ska använda firebase så ändra dessa
+        //putRequest("person.json");   //Om vi ska använda firebase så ändra dessa
+        readAPI();
         launch(); //Launches our JavaFX
     }
 
@@ -139,6 +139,64 @@ public class HelloApplication extends Application {
         }
     }
 
+    public static void readAPI (){
+        String databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+        String databasePath = "";
+        try {
+            // Create the URL for the HTTP GET request
+            URL url = new URL(databaseUrl + databasePath);
+
+            // Open a connection to the URL
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Set the request method to GET
+            connection.setRequestMethod("GET");
+
+            // Get the response code t.ex 400, 404, 200 är ok
+            int responseCode = connection.getResponseCode();
+            System.out.println("response code:" + responseCode);
+            if (responseCode == HttpURLConnection.HTTP_OK) { // ok är bra
+                // Read the response from the InputStream
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+
+               /* Scanner sc = new Scanner(String.valueOf(response));
+                String page = ""; //som CSV, läser första raden för att få fram värde till headers i kolumnerna
+                while (sc.hasNext()) {
+                    String line2 = sc.nextLine();
+                    String[] array = line2.split(",");
+                    System.out.println(line2);
+                    page += line2;
+                    System.out.println(line2);
+                }
+                *//*if (sc.hasNext()) { //Läser första raden i filen för att få rubriker till headers
+                    String headerLine = sc.nextLine();
+                    String[] columnHeaders = headerLine.split(",");
+                    System.out.println(Arrays.toString(columnHeaders));
+                }*/
+
+
+
+                // Handle the response data
+                System.out.println("Response from Firebase Realtime Database:");
+                System.out.println(response);
+            } else { //404 403 402 etc error koder
+                // Handle the error response
+                System.out.println("Error response code: " + responseCode);
+            }
+
+            // Close the connection
+            connection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
