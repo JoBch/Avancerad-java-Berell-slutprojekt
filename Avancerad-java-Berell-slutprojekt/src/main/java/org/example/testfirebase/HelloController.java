@@ -2,37 +2,45 @@ package org.example.testfirebase;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
-import java.util.Optional;
-
-import static javafx.scene.image.Image.*;
-import static org.example.testfirebase.HelloApplication.databaseUrl;
-import static org.example.testfirebase.HelloApplication.putRequest;
+import static org.example.testfirebase.HelloApplication.question;
+import static org.example.testfirebase.HelloApplication.readAPI;
 
 public class HelloController {
 
-    public TextArea outputTextArea;
+    @FXML
+    private Button falseButton;
 
     @FXML
-    private Button start;
-    @FXML
-    private Button stop;
-    @FXML
-    private ImageView imageView;
-
-
+    private Label headLineLabel;
 
     @FXML
-    void onstartButtonClick(ActionEvent event) throws InterruptedException {
-        //putRequest("person.json");
-        //Countdown for start of quiz show it in
+    private Button nextButton;
+
+    @FXML
+    private TextArea outputTextArea;
+
+    @FXML
+    private Button trueButton;
+
+    @FXML
+    void onfalseButtonClick(ActionEvent event) {
+
     }
+
     @FXML
-    void onstopButtonClick(ActionEvent event) {
-        outputTextArea.appendText("Because he is poopoo");
+    void onnextButtonClick(ActionEvent event) {
+        //putRequest("person.json");
+        readAPI();
+        outputTextArea.setText(question);
+    }
+
+    @FXML
+    void ontrueButtonClick(ActionEvent event) {
+
     }
 
 }

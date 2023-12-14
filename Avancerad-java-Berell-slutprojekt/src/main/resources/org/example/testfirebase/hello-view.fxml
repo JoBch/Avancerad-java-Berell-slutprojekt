@@ -2,28 +2,46 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" prefHeight="315.0" prefWidth="401.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.testfirebase.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <TextArea fx:id="outputTextArea" id="outputTextArea" text="Why does Andreas smell like poopoo?" prefHeight="200.0" prefWidth="200.0" />
-   <GridPane>
-     <columnConstraints>
-       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-     </columnConstraints>
-     <rowConstraints>
-       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-     </rowConstraints>
-      <children>
-         <Button fx:id="start" mnemonicParsing="false" onAction="#onstartButtonClick" text="Start" GridPane.halignment="CENTER" />
-          <Button fx:id="stop" onAction="#onstopButtonClick" text="Stop" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-      </children>
-   </GridPane>
+   <BorderPane prefHeight="302.0" prefWidth="385.0">
+      <bottom>
+         <GridPane BorderPane.alignment="CENTER">
+           <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <Button fx:id="trueButton" mnemonicParsing="false" onAction="#ontrueButtonClick" text="True" GridPane.halignment="CENTER" />
+                <Button fx:id="falseButton" onAction="#onfalseButtonClick" text="False" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+               <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onnextButtonClick" text="Next Question" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            </children>
+         </GridPane>
+      </bottom>
+      <center>
+         <TextArea id="outputTextArea" fx:id="outputTextArea" editable="false" text="Why does Andreas smell like poopoo?" wrapText="true" BorderPane.alignment="CENTER" />
+      </center>
+      <top>
+         <Label fx:id="headLineLabel" text="Welcome to the Trivia!!" BorderPane.alignment="CENTER">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+      </top>
+   </BorderPane>
 </VBox>
