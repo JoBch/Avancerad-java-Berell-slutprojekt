@@ -11,11 +11,9 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class Main extends Application {
-    public static HashMap<String, Object> dataMap;
     public static String question;
-    public static String databaseUrl = "https://opentdb.com/api.php?amount=1";
     public static boolean answer;
-    public Optional<String> result;
+    public static Optional<String> result;
 
     public static void main(String[] args) {
         launch(); //Launches our JavaFX

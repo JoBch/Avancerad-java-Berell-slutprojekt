@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 
 import static org.example.testfirebase.Main.answer;
 import static org.example.testfirebase.Main.question;
+import static org.example.testfirebase.Player.putRequest;
 import static org.example.testfirebase.ReadAPI.readAPI;
 //import static org.example.testfirebase.HelloApplication.readAPI;
 
@@ -41,7 +42,7 @@ public class Controller {
     @FXML
     void onnextButtonClick(ActionEvent event) {
         nextButton.setText("Next Question");
-        //putRequest("person.json"); //Think we need it here to upload score to firebase?
+        putRequest("person.json"); //Think we need it here to upload score to firebase?
         readAPI();
         outputTextArea.setText(question);
     }
