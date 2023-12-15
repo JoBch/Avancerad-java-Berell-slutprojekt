@@ -28,6 +28,12 @@ public class Main extends Application {
         stage.setTitle("Trivia Game");
         stage.setScene(scene);
 
+        welcomeDialog();
+
+        //putRequest(result + ".json"); //This might work for putting info and username in firebase
+        stage.show();
+    }
+    public void welcomeDialog() throws InterruptedException {
         //Dialog with a confirmation request - use to input player name and start game after countdown 5 sec?
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Text Input Dialog");
@@ -37,10 +43,8 @@ public class Main extends Application {
         // Traditional way to get the response value.
         result = dialog.showAndWait();
         if (result.isPresent()) {
-            Thread.sleep(0);//program pauses before continuing, no sleep in testing
+            //Thread.sleep(0);//program pauses before continuing, no sleep in testing
             System.out.println("Your name: " + result.get());
         }
-        //putRequest(result + ".json"); //This might work for putting info and username in firebase
-        stage.show();
     }
 }

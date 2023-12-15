@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="315.0" prefWidth="401.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.testfirebase.Controller">
+<VBox alignment="CENTER" prefHeight="315.0" prefWidth="401.0" spacing="20.0" style="-fx-background-color: #ff8cbe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.testfirebase.Controller">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -34,12 +34,12 @@
          </GridPane>
       </bottom>
       <center>
-         <TextArea id="outputTextArea" fx:id="outputTextArea" editable="false" text="Why does Andreas smell like poopoo?" wrapText="true" BorderPane.alignment="CENTER" />
+         <TextArea id="outputTextArea" fx:id="outputTextArea" editable="false" style="-f: #ff8cbe;" wrapText="true" BorderPane.alignment="CENTER" />
       </center>
       <top>
          <Label fx:id="headLineLabel" text="Welcome to the Trivia!!" BorderPane.alignment="CENTER">
             <font>
-               <Font size="18.0" />
+               <Font name="Baskerville Old Face" size="18.0" />
             </font>
          </Label>
       </top>
