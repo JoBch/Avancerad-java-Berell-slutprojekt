@@ -54,9 +54,9 @@ public class ReadAPI extends Main {
                     question = firstResult.get("question").getAsString();
                     //To be able to display " and ' correctly display them
                     question = question.replaceAll("&quot;", "\"").replaceAll("&#039;", "'")
-                            .replaceAll("&eacute;", "é");
+                            .replaceAll("&eacute;", "é").replaceAll("&rsquo;", "´");
                     //Get the value from correct_answer from the first result
-                    answer = firstResult.get("correct_answer").getAsString();
+                    answer = firstResult.get("correct_answer").getAsBoolean();
                     System.out.println("Question: " + question);
                     System.out.println(answer);
                 } else {

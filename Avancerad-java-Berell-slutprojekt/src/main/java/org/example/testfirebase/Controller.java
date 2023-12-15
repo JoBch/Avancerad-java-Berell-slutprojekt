@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
+import static org.example.testfirebase.Main.answer;
 import static org.example.testfirebase.Main.question;
 import static org.example.testfirebase.ReadAPI.readAPI;
 //import static org.example.testfirebase.HelloApplication.readAPI;
@@ -29,7 +30,12 @@ public class Controller {
 
     @FXML
     void onfalseButtonClick(ActionEvent event) {
-
+        if (!answer){
+            outputTextArea.appendText("\ncorrect");
+        }else {
+            outputTextArea.appendText("\nLOL FEL");
+        }
+        outputTextArea.appendText("click next question");
     }
 
     @FXML
@@ -42,7 +48,12 @@ public class Controller {
 
     @FXML
     void ontrueButtonClick(ActionEvent event) {
-
+        if (answer){
+            outputTextArea.appendText("\ncorrect");
+        }else {
+            outputTextArea.appendText("\nLOL FEL");
+        }
+        outputTextArea.appendText("click next question");
     }
 
 }
