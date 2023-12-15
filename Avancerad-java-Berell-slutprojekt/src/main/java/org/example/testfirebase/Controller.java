@@ -6,10 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
-import static org.example.testfirebase.HelloApplication.question;
-import static org.example.testfirebase.HelloApplication.readAPI;
+import static org.example.testfirebase.Main.question;
+import static org.example.testfirebase.ReadAPI.readAPI;
+//import static org.example.testfirebase.HelloApplication.readAPI;
 
-public class HelloController {
+public class Controller {
 
     @FXML
     private Button falseButton;
@@ -33,6 +34,7 @@ public class HelloController {
 
     @FXML
     void onnextButtonClick(ActionEvent event) {
+        nextButton.setText("Next Question");
         //putRequest("person.json"); //Think we need it here to upload score to firebase?
         readAPI();
         outputTextArea.setText(question);

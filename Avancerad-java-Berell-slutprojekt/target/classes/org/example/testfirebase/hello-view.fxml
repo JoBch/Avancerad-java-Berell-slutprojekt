@@ -29,7 +29,7 @@
             <children>
                <Button fx:id="trueButton" mnemonicParsing="false" onAction="#ontrueButtonClick" text="True" GridPane.halignment="CENTER" />
                 <Button fx:id="falseButton" onAction="#onfalseButtonClick" text="False" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-               <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onnextButtonClick" text="Next Question" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+               <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onnextButtonClick" text="Start Game" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             </children>
          </GridPane>
       </bottom>
