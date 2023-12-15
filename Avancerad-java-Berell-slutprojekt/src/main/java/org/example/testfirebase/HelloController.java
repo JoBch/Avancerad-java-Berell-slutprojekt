@@ -33,7 +33,7 @@ public class HelloController {
 
     @FXML
     void onnextButtonClick(ActionEvent event) {
-        //putRequest("person.json");
+        //putRequest("person.json"); //Think we need it here to upload score to firebase?
         readAPI();
         outputTextArea.setText(question);
     }

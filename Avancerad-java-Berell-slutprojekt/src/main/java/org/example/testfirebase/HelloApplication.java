@@ -25,25 +25,9 @@ public class HelloApplication extends Application {
     public static String question;
     static String databaseUrl = "https://opentdb.com/api.php?amount=1";
     private static String answer;
+    public Optional<String> result;
 
     public static void main(String[] args) throws IOException {
-        /*URL url = new URL("https://opentdb.com/api.php?amount=1");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestProperty("accept", "application/json");
-
-        InputStream responseStream = connection.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream));
-        StringBuilder response = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
-        }
-        reader.close();
-        //JsonParser parse = new JsonParser();
-        JsonParser parser = null;
-        JsonObject root = parser.parse(response.toString()).getAsJsonObject();
-        System.out.println(root.get("fact").getAsString());*/
-
         //firebaseRequests("person.json"); //Om vi ska använda firebase så ändra dessa
         //putRequest("person.json");   //Om vi ska använda firebase så ändra dessa
         readAPI();
@@ -168,24 +152,24 @@ public class HelloApplication extends Application {
                 reader.close();
 
                 //Parsing our API
-                JsonParser parse = new JsonParser();
                 JsonParser parser = new JsonParser();
                 JsonObject root = parser.parse(response.toString()).getAsJsonObject();
 
                 //Making the response from API into a jsonarray named resultsArray, so we can later extract what we need from the array
                 JsonArray resultsArray = root.getAsJsonArray("results");
                 //If results array exists and has a size bigger than 0 - mostly error handling
-                if (resultsArray != null && resultsArray.size() > 0) {
+                if (resultsArray != null && !resultsArray.isEmpty()) {
                     //Retrieve the first element from the results array
                     JsonObject firstResult = resultsArray.get(0).getAsJsonObject();
                     //Get the value associated with the "question" key from the first result
                     question = firstResult.get("question").getAsString();
                     //To be able to display " and ' correctly display them
-                    question = question.replaceAll("&quot;", "\"").replaceAll("&#039;", "'");
+                    question = question.replaceAll("&quot;", "\"").replaceAll("&#039;", "'")
+                            .replaceAll("&eacute;", "é");
                     //Get the value from correct_answer from the first result
                     answer = firstResult.get("correct_answer").getAsString();
-                    System.out.println(answer);
                     System.out.println("Question: " + question);
+                    System.out.println(answer);
                 } else {
                     System.out.println("No results found in the response.");
                 }
@@ -212,18 +196,19 @@ public class HelloApplication extends Application {
         stage.setTitle("Trivia Game");
         stage.setScene(scene);
 
-        //Dialog with a confirmation request - use to input playername and start game after countdown 5 sec?
+        //Dialog with a confirmation request - use to input player name and start game after countdown 5 sec?
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Text Input Dialog");
         dialog.setHeaderText("Look, a Text Input Dialog");
         dialog.setContentText("Please enter your name:");
 
         // Traditional way to get the response value.
-        Optional<String> result = dialog.showAndWait();
+        result = dialog.showAndWait();
         if (result.isPresent()) {
             Thread.sleep(0);//program pauses before continuing, no sleep in testing
             System.out.println("Your name: " + result.get());
         }
+        //putRequest(result + ".json"); //This might work for putting info and username in firebase
         stage.show();
     }
 }
