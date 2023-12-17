@@ -3,6 +3,7 @@ package org.example.testfirebase;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.collections.FXCollections;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +16,19 @@ public class ReadAPI extends Main {
     public static void readAPI() {
         //SwitchCase setText to choose difficulty
         String databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+        /*if (FXCollections.observableArrayList("Easy").equals("Easy")){
+            databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+            System.out.println("EASY");
+        } else if (FXCollections.observableArrayList(1).equals("Medium")) {
+            databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+            System.out.println("MEDIUM");
+        } else if (FXCollections.observableArrayList(0).equals("Hard")) {
+            databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+            System.out.println("MEDIUM");
+        } else {
+            databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+            System.out.println("Något gick fel");
+        }*/
         String databasePath = "";
         try {
             //Create the URL for the HTTP GET request
