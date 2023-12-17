@@ -1,6 +1,7 @@
 package org.example.testfirebase;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
@@ -13,9 +14,13 @@ import java.util.Optional;
 public class Main extends Application {
     public static HashMap<String, Object> dataMap;
     public static String question;
-    public static String databaseUrl = "https://opentdb.com/api.php?amount=1";
+    public static String databaseUrl = "https://opentdb.com/api.php?amount=1&type=boolean";
+    public static String easy = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+    public static String medium = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
+    public static String hard = "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
     public static boolean answer;
     public static Optional<String> result;
+    public static Thread countDownThread;
 
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
@@ -42,9 +47,23 @@ public class Main extends Application {
 
         // Traditional way to get the response value.
         result = dialog.showAndWait();
-        if (result.isPresent()) {
-            //Thread.sleep(0);//program pauses before continuing, no sleep in testing
-            System.out.println("Your name: " + result.get());
-        }
+        //Thread.sleep(0);//program pauses before continuing, no sleep in testing
+        result.ifPresent(s -> System.out.println("Your name: " + s));
+    }
+    public static void countDown(){
+        countDownThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 10; i >= 0; i--) {
+                    System.out.println(i + " ");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        countDownThread.start();
     }
 }

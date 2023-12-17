@@ -15,16 +15,26 @@ public class ReadAPI extends Main {
 
     public static void readAPI() {
         //SwitchCase setText to choose difficulty
-        String databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
-        /*if (FXCollections.observableArrayList("Easy").equals("Easy")){
-            databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+        databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+        /*switch (databaseUrl){
+            case "Easy": databaseUrl = easy;
+                break;
+            case "Medium": databaseUrl = medium;
+                break;
+            case "Hard": databaseUrl = hard;
+                break;
+            default:    System.out.println("Något gick fel");
+                break;
+        }*/
+       /* if (databaseUrl.matches("easy")){
+            databaseUrl = easy;
             System.out.println("EASY");
-        } else if (FXCollections.observableArrayList(1).equals("Medium")) {
-            databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+        } else if (databaseUrl.matches("medium")) {
+            databaseUrl = medium;
             System.out.println("MEDIUM");
-        } else if (FXCollections.observableArrayList(0).equals("Hard")) {
-            databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
-            System.out.println("MEDIUM");
+        } else if (databaseUrl.matches("hard")) {
+            databaseUrl = hard;
+            System.out.println("HARD");
         } else {
             databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
             System.out.println("Något gick fel");

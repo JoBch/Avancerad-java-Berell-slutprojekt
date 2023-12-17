@@ -41,7 +41,7 @@
          </GridPane>
       </bottom>
       <center>
-         <TextArea id="outputTextArea" fx:id="outputTextArea" editable="false" style="-f: #ff8cbe;" wrapText="true" BorderPane.alignment="CENTER" />
+         <TextArea id="outputTextArea" fx:id="outputTextArea" editable="false" promptText="RULES: Press start, a true/false question will show. You have ten seconds to press the corect button or else no points" style="-f: #ff8cbe;" wrapText="true" BorderPane.alignment="CENTER" />
       </center>
    </BorderPane>
 </VBox>

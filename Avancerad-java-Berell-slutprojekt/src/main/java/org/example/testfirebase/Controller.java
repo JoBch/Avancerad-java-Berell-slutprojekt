@@ -12,8 +12,7 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static org.example.testfirebase.Main.answer;
-import static org.example.testfirebase.Main.question;
+import static org.example.testfirebase.Main.*;
 import static org.example.testfirebase.ReadAPI.readAPI;
 //import static org.example.testfirebase.HelloApplication.readAPI;
 
@@ -37,13 +36,15 @@ public class Controller implements Initializable {
     private Button trueButton;
 
     @FXML
-    void onfalseButtonClick(ActionEvent event) {
+    void onfalseButtonClick(ActionEvent event){
         if (!answer){
             outputTextArea.appendText("\ncorrect");
+            //NÅGOT SOM STOPPAR NEDRÄKNINGEN
         }else {
             outputTextArea.appendText("\nLOL FEL");
+            //NÅGOT SOM STOPPAR NEDRÄKNINGEN
         }
-        outputTextArea.appendText("click next question");
+        outputTextArea.appendText("\nclick next question");
     }
 
     @FXML
@@ -51,6 +52,7 @@ public class Controller implements Initializable {
         nextButton.setText("Next Question");
         //putRequest("person.json"); //Think we need it here to upload score to firebase?
         readAPI();
+        countDown();
         outputTextArea.setText(question);
     }
 
@@ -58,10 +60,12 @@ public class Controller implements Initializable {
     void ontrueButtonClick(ActionEvent event) {
         if (answer){
             outputTextArea.appendText("\ncorrect");
+            //NÅGOT SOM STOPPAR NEDRÄKNINGEN
         }else {
             outputTextArea.appendText("\nLOL FEL");
+            //NÅGOT SOM STOPPAR NEDRÄKNINGEN
         }
-        outputTextArea.appendText("click next question");
+        outputTextArea.appendText("\nclick next question");
     }
 
     @Override
