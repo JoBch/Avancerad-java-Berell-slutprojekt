@@ -1,12 +1,8 @@
 package org.example.testfirebase;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
@@ -17,12 +13,9 @@ import java.util.Optional;
 public class Main extends Application {
     public static HashMap<String, Object> dataMap;
     public static String question;
-    public static String databaseUrl;// = "https://opentdb.com/api.php?amount=1";
+    public static String databaseUrl = "https://opentdb.com/api.php?amount=1";
     public static boolean answer;
     public Optional<String> result;
-    public boolean gameModeEasy, gameModeMedium, gameModeHard = true;
-    public static TextArea outputTextArea;
-    public ComboBox<String> cBoxGameMode;
 
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
@@ -54,5 +47,4 @@ public class Main extends Application {
             System.out.println("Your name: " + result.get());
         }
     }
-
 }

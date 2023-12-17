@@ -60,7 +60,8 @@ public class Player extends Main {
     public static void putRequest(String databasePath) {
 
         try {
-            URL url = new URL(databaseUrl + databasePath);
+            String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/.json";
+            URL url = new URL(databaseUrl);
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -70,17 +71,13 @@ public class Player extends Main {
 
             connection.setRequestProperty("Content-Type", "application/json"); //typen
 
-            dataMap = new HashMap<>();
-            dataMap.put("name", "Joel");
-            dataMap.put("age", 28);
-            dataMap.put("sex", "male");
-            dataMap.put("last", "Bech");
-            dataMap.put("korvar", "ja");
-            //dataMap.put(String.valueOf(scan));
+            HashMap<String, Object> dataMap = new HashMap<>();
+            dataMap.put(String.valueOf(result), answer);
 
-            String jsonInputString = new Gson().toJson(dataMap);
-            //String jsonInputString = "{\"name\": \"Alrik\"}";
+            //String jsonInputString = new Gson().toJson(dataMap);
+            String jsonInputString = "{\"Optional\":{\"Joel\":true}}";
 
+            System.out.println(dataMap); //Just for trying
             // Write the data to the output stream
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);

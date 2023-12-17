@@ -1,29 +1,23 @@
 package org.example.testfirebase;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.ChoiceBoxListCell;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
-import java.lang.runtime.SwitchBootstraps;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import static org.example.testfirebase.Main.*;
+import static org.example.testfirebase.Main.answer;
+import static org.example.testfirebase.Main.question;
 import static org.example.testfirebase.ReadAPI.readAPI;
 //import static org.example.testfirebase.HelloApplication.readAPI;
 
-public class Controller implements Initializable {
+public class Controller {
 
     @FXML
     private Button falseButton;
 
     @FXML
     private Label headLineLabel;
-    @FXML
-    ComboBox<String> cBoxGameMode;
 
     @FXML
     private Button nextButton;
@@ -41,14 +35,13 @@ public class Controller implements Initializable {
         }else {
             outputTextArea.appendText("\nLOL FEL");
         }
-        outputTextArea.appendText("\nclick next question");
+        outputTextArea.appendText("click next question");
     }
 
     @FXML
     void onnextButtonClick(ActionEvent event) {
         nextButton.setText("Next Question");
         //putRequest("person.json"); //Think we need it here to upload score to firebase?
-
         readAPI();
         outputTextArea.setText(question);
     }
@@ -60,13 +53,8 @@ public class Controller implements Initializable {
         }else {
             outputTextArea.appendText("\nLOL FEL");
         }
-        outputTextArea.appendText("\nclick next question");
+        outputTextArea.appendText("click next question");
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        cBoxGameMode.setItems(FXCollections.observableArrayList("Easy", "Medium", "Hard"));
-
-    }
 }
 
