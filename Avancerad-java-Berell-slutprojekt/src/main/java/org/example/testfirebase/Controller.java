@@ -1,23 +1,31 @@
 package org.example.testfirebase;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static org.example.testfirebase.Main.answer;
 import static org.example.testfirebase.Main.question;
 import static org.example.testfirebase.ReadAPI.readAPI;
 //import static org.example.testfirebase.HelloApplication.readAPI;
 
-public class Controller {
+public class Controller implements Initializable {
 
     @FXML
     private Button falseButton;
 
     @FXML
     private Label headLineLabel;
+    @FXML
+    private ComboBox<String> cBoxGameMode;
 
     @FXML
     private Button nextButton;
@@ -56,5 +64,9 @@ public class Controller {
         outputTextArea.appendText("click next question");
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        cBoxGameMode.setItems(FXCollections.observableArrayList("Easy", "Medium", "Hard"));
+    }
 }
 

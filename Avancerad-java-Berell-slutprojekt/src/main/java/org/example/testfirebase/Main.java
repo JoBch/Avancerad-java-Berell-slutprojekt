@@ -15,7 +15,7 @@ public class Main extends Application {
     public static String question;
     public static String databaseUrl = "https://opentdb.com/api.php?amount=1";
     public static boolean answer;
-    public Optional<String> result;
+    public static Optional<String> result;
 
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
