@@ -4,6 +4,6 @@ module org.example.testfirebase {
     requires com.google.gson;
 
 
-    opens org.example.testfirebase to javafx.fxml;
-    exports org.example.testfirebase;
+    opens org.example.quizAPI to javafx.fxml;
+    exports org.example.quizAPI;
 }

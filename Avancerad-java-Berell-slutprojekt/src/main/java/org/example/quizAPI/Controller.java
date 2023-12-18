@@ -1,4 +1,4 @@
-package org.example.testfirebase;
+package org.example.quizAPI;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -13,9 +13,9 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static org.example.testfirebase.Main.answer;
-import static org.example.testfirebase.Main.question;
-import static org.example.testfirebase.ReadAPI.readAPI;
+import static org.example.quizAPI.Main.answer;
+import static org.example.quizAPI.Main.question;
+import static org.example.quizAPI.ReadAPI.readAPI;
 
 public class Controller implements Initializable {
 

@@ -1,4 +1,4 @@
-package org.example.testfirebase;
+package org.example.quizAPI;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;

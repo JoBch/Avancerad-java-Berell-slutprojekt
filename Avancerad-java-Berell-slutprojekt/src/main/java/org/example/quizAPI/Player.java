@@ -1,6 +1,4 @@
-package org.example.testfirebase;
-
-import com.google.gson.Gson;
+package org.example.quizAPI;
 
 import java.io.BufferedReader;
 import java.io.IOException;

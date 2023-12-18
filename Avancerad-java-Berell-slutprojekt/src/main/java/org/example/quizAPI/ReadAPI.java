@@ -1,9 +1,8 @@
-package org.example.testfirebase;
+package org.example.quizAPI;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javafx.collections.FXCollections;
 
 import java.io.BufferedReader;
 import java.io.IOException;
