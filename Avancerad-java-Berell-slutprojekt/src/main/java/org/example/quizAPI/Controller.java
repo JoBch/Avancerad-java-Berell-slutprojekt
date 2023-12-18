@@ -1,7 +1,6 @@
 package org.example.quizAPI;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,14 +12,15 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static org.example.quizAPI.Main.answer;
-import static org.example.quizAPI.Main.question;
+import static org.example.quizAPI.Player.putRequest;
 import static org.example.quizAPI.ReadAPI.readAPI;
 
 public class Controller extends Main implements Initializable {
 
     //Number of correct answers, counts in true/false buttons - use it with firebase?
-    int correctAnswers=0;
+    public int correctAnswers = 0;
+    public String data;
+    public String[] items;
     boolean stopCountDown = false;
     @FXML
     private Label countDownLabel;
@@ -36,8 +36,6 @@ public class Controller extends Main implements Initializable {
     private TextArea outputTextArea;
     @FXML
     private Button trueButton;
-    public String data;
-    public String[] items;
 
     @FXML
     void onfalseButtonClick(ActionEvent event) {
@@ -56,12 +54,14 @@ public class Controller extends Main implements Initializable {
         nextButton.setText("Next Question");
         //putRequest("person.json"); //Think we need it here to upload score to firebase?
         stopCountDown = false;
+        putRequest(userName + ".json");
         readAPI();
         countDown();
         trueButton.setDisable(false);
         falseButton.setDisable(false);
         outputTextArea.setText(question);
         System.out.println(correctAnswers);
+        System.out.println(userName);
     }
 
     @FXML
@@ -81,9 +81,9 @@ public class Controller extends Main implements Initializable {
         items = new String[]{"Easy", "Medium", "Hard"};
         cBoxGameMode.getItems().addAll(items);
 
-        cBoxGameMode.setOnAction(event ->{
+        cBoxGameMode.setOnAction(event -> {
 
-            if (cBoxGameMode.toString().equals(items[0])){
+            if (cBoxGameMode.toString().equals(items[0])) {
                 databaseUrl = easy;
                 System.out.println(databaseUrl + items[0]);
             } else if (cBoxGameMode.toString().equals(items[1])) {

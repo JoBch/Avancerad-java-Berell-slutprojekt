@@ -1,8 +1,6 @@
 package org.example.quizAPI;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
@@ -10,7 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Optional;
 
 public class Main extends Application {
     public static HashMap<String, Object> dataMap;
@@ -20,8 +17,10 @@ public class Main extends Application {
     public static String medium = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
     public static String hard = "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
     public static boolean answer;
-    public static Optional<String> userName;
+    public static String userName;
+    public static int correctAnswers = 0;
     public static String data;
+
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
     }
@@ -47,7 +46,7 @@ public class Main extends Application {
         dialog.setContentText("Please enter your name:");
 
         //Getting the response value
-        userName = dialog.showAndWait();
-        userName.ifPresent(s -> System.out.println("Your name: " + s));
+        userName = String.valueOf(dialog.showAndWait()).split("\\[")[1].split("\\]")[0];
+        //userName.ifPresent(s -> System.out.println("Your name: " + s));
     }
 }

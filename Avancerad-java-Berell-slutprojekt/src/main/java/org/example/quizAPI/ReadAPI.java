@@ -14,7 +14,7 @@ public class ReadAPI extends Main {
 
     public static void readAPI() {
         //SwitchCase setText to choose difficulty
-        //databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+        databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
 /*        switch (databaseUrl){
             case data == "Easy": databaseUrl = easy;
                 break;

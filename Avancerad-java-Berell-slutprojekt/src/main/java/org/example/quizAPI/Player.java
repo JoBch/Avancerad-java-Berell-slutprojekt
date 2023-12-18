@@ -1,5 +1,7 @@
 package org.example.quizAPI;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -69,11 +71,13 @@ public class Player extends Main {
 
             connection.setRequestProperty("Content-Type", "application/json"); //typen
 
-            HashMap<String, Object> dataMap = new HashMap<>();
-            dataMap.put(String.valueOf(userName), answer);
+            HashMap<String, Integer> dataMap = new HashMap<>();
+            dataMap.put(String.valueOf(userName), correctAnswers);
 
-            //String jsonInputString = new Gson().toJson(dataMap);
-            String jsonInputString = "{\"Optional\":{\"Joel\":true}}";
+            String jsonInputString = new Gson().toJson(dataMap);
+            System.out.println(jsonInputString);
+
+            // String jsonInputString = "{\"Hasse\":0}";
 
             System.out.println(dataMap); //Just for trying
             // Write the data to the output stream
