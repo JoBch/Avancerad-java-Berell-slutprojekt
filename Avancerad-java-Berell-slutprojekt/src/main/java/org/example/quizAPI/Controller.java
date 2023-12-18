@@ -18,8 +18,6 @@ import static org.example.quizAPI.ReadAPI.readAPI;
 public class Controller extends Main implements Initializable {
 
     //Number of correct answers, counts in true/false buttons - use it with firebase?
-    public int correctAnswers = 0;
-    public String data;
     public String[] items;
     boolean stopCountDown = false;
     @FXML
@@ -61,7 +59,6 @@ public class Controller extends Main implements Initializable {
         falseButton.setDisable(false);
         outputTextArea.setText(question);
         System.out.println(correctAnswers);
-        System.out.println(userName);
     }
 
     @FXML

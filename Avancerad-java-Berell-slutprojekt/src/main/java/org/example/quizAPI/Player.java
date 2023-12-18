@@ -2,9 +2,6 @@ package org.example.quizAPI;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -13,50 +10,9 @@ import java.util.HashMap;
 
 public class Player extends Main {
 
-    //Requests data from the supplied firebase URL and prints it in console
-    public static void firebaseRequests(String databasePath) {
-        String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
+    public static HashMap<String, Integer> dataMap = new HashMap<>();
 
-        try {
-            // Create the URL for the HTTP GET request
-            URL url = new URL(databaseUrl + databasePath);
-
-            // Open a connection to the URL
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            // Set the request method to GET
-            connection.setRequestMethod("GET");
-
-            // Get the response code t.ex 400, 404, 200 är ok
-            int responseCode = connection.getResponseCode();
-            System.out.println("response code:" + responseCode);
-            if (responseCode == HttpURLConnection.HTTP_OK) { // ok är bra
-                // Read the response from the InputStream
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line;
-                StringBuilder response = new StringBuilder();
-
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                // Handle the response data
-                System.out.println("Response from Firebase Realtime Database:");
-                System.out.println(response);
-            } else { //404 403 402 etc error koder
-                // Handle the error response
-                System.out.println("Error response code: " + responseCode);
-            }
-
-            // Close the connection
-            connection.disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //Puts data in firebase by the help of the dataMap, maybe get this to work with JavaFX?
+    //Puts data in firebase by the help of the dataMap
     public static void putRequest(String databasePath) {
 
         try {
@@ -71,13 +27,10 @@ public class Player extends Main {
 
             connection.setRequestProperty("Content-Type", "application/json"); //typen
 
-            HashMap<String, Integer> dataMap = new HashMap<>();
-            dataMap.put(String.valueOf(userName), correctAnswers);
+            dataMap.put(userName, correctAnswers);
 
             String jsonInputString = new Gson().toJson(dataMap);
             System.out.println(jsonInputString);
-
-            // String jsonInputString = "{\"Hasse\":0}";
 
             System.out.println(dataMap); //Just for trying
             // Write the data to the output stream
@@ -94,12 +47,10 @@ public class Player extends Main {
             else
                 System.out.println("Error response code: " + responseCode);
 
-
             // Close the connection
             connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

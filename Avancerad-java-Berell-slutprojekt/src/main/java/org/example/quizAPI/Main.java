@@ -7,10 +7,9 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public class Main extends Application {
-    public static HashMap<String, Object> dataMap;
+    //public static HashMap<String, Integer> dataMap;
     public static String question;
     public static String databaseUrl;// = "https://opentdb.com/api.php?amount=1&type=boolean";
     public static String easy = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
@@ -19,7 +18,6 @@ public class Main extends Application {
     public static boolean answer;
     public static String userName;
     public static int correctAnswers = 0;
-    public static String data;
 
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
