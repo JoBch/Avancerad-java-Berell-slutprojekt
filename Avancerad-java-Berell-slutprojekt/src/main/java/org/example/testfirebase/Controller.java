@@ -19,6 +19,8 @@ import static org.example.testfirebase.ReadAPI.readAPI;
 
 public class Controller implements Initializable {
 
+    //Number of correct answers, counts in true/false buttons - use it with firebase?
+    int correctAnswers=0;
     boolean stopCountDown = false;
     @FXML
     private Label countDownLabel;
@@ -38,6 +40,7 @@ public class Controller implements Initializable {
     @FXML
     void onfalseButtonClick(ActionEvent event) {
         if (!answer) {
+            correctAnswers++;
             outputTextArea.appendText("\nCorrect");
         } else {
             outputTextArea.appendText("\nLOL FEL");
@@ -56,11 +59,13 @@ public class Controller implements Initializable {
         trueButton.setDisable(false);
         falseButton.setDisable(false);
         outputTextArea.setText(question);
+        System.out.println(correctAnswers);
     }
 
     @FXML
     void ontrueButtonClick(ActionEvent event) {
         if (answer) {
+            correctAnswers++;
             outputTextArea.appendText("\nCorrect");
         } else {
             outputTextArea.appendText("\nLOL FEL");
