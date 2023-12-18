@@ -36,6 +36,7 @@ public class Controller implements Initializable {
     private TextArea outputTextArea;
     @FXML
     private Button trueButton;
+    public String data;
 
     @FXML
     void onfalseButtonClick(ActionEvent event) {
@@ -76,7 +77,14 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cBoxGameMode.setItems(FXCollections.observableArrayList("Easy", "Medium", "Hard"));
+        String[] items = {"Easy", "Medium", "Hard"};
+        cBoxGameMode.getItems().addAll(items);
+
+        cBoxGameMode.setOnAction(event ->{
+
+            data = cBoxGameMode.getSelectionModel().getSelectedItem();
+            
+        });
     }
 
     public void countDown() {

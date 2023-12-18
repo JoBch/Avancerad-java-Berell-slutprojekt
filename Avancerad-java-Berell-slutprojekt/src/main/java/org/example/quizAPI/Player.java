@@ -70,7 +70,7 @@ public class Player extends Main {
             connection.setRequestProperty("Content-Type", "application/json"); //typen
 
             HashMap<String, Object> dataMap = new HashMap<>();
-            dataMap.put(String.valueOf(result), answer);
+            dataMap.put(String.valueOf(userName), answer);
 
             //String jsonInputString = new Gson().toJson(dataMap);
             String jsonInputString = "{\"Optional\":{\"Joel\":true}}";

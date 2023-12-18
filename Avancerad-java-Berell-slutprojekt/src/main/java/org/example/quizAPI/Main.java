@@ -21,7 +21,8 @@ public class Main extends Application {
     public static String hard = "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
     public static boolean answer;
     public static ObservableList<String[]> cBoxGameModeList = FXCollections.observableArrayList();
-    public static Optional<String> result;
+    public static Optional<String> userName;
+    public static String data;
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
     }
@@ -47,7 +48,7 @@ public class Main extends Application {
         dialog.setContentText("Please enter your name:");
 
         //Getting the response value
-        result = dialog.showAndWait();
-        result.ifPresent(s -> System.out.println("Your name: " + s));
+        userName = dialog.showAndWait();
+        userName.ifPresent(s -> System.out.println("Your name: " + s));
     }
 }
