@@ -25,7 +25,7 @@ public class ReadAPI extends Main {
             default:    System.out.println("Något gick fel");
                 break;
         }*/
-        if (data.equals("Easy")){
+/*        if (data.equals("Easy")){
             databaseUrl = easy;
             System.out.println("EASY");
         } else if (data.equals("Medium")) {
@@ -37,7 +37,7 @@ public class ReadAPI extends Main {
         } else {
             databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
             System.out.println("Något gick fel");
-        }
+        }*/
         String databasePath = "";
         try {
             //Create the URL for the HTTP GET request

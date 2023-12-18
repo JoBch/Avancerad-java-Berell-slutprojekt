@@ -15,12 +15,11 @@ import java.util.Optional;
 public class Main extends Application {
     public static HashMap<String, Object> dataMap;
     public static String question;
-    public static String databaseUrl = "https://opentdb.com/api.php?amount=1&type=boolean";
+    public static String databaseUrl;// = "https://opentdb.com/api.php?amount=1&type=boolean";
     public static String easy = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
     public static String medium = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
     public static String hard = "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
     public static boolean answer;
-    public static ObservableList<String[]> cBoxGameModeList = FXCollections.observableArrayList();
     public static Optional<String> userName;
     public static String data;
     public static void main(String[] args) {

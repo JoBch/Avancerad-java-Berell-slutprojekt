@@ -17,7 +17,7 @@ import static org.example.quizAPI.Main.answer;
 import static org.example.quizAPI.Main.question;
 import static org.example.quizAPI.ReadAPI.readAPI;
 
-public class Controller implements Initializable {
+public class Controller extends Main implements Initializable {
 
     //Number of correct answers, counts in true/false buttons - use it with firebase?
     int correctAnswers=0;
@@ -37,6 +37,7 @@ public class Controller implements Initializable {
     @FXML
     private Button trueButton;
     public String data;
+    public String[] items;
 
     @FXML
     void onfalseButtonClick(ActionEvent event) {
@@ -77,13 +78,24 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] items = {"Easy", "Medium", "Hard"};
+        items = new String[]{"Easy", "Medium", "Hard"};
         cBoxGameMode.getItems().addAll(items);
 
         cBoxGameMode.setOnAction(event ->{
 
-            data = cBoxGameMode.getSelectionModel().getSelectedItem();
-            
+            if (cBoxGameMode.toString().equals(items[0])){
+                databaseUrl = easy;
+                System.out.println(databaseUrl + items[0]);
+            } else if (cBoxGameMode.toString().equals(items[1])) {
+                databaseUrl = medium;
+                System.out.println(databaseUrl + items[1]);
+            } else if (cBoxGameMode.toString().equals(items[2])) {
+                databaseUrl = hard;
+                System.out.println(databaseUrl + items[2]);
+            } else {
+                databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+                System.out.println("Något gick fel");
+            }
         });
     }
 
