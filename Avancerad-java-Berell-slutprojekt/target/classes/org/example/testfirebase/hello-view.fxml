@@ -43,5 +43,12 @@
       <center>
          <TextArea id="outputTextArea" fx:id="outputTextArea" editable="false" promptText="RULES: Press start, a true/false question will show. You have ten seconds to press the corect button or else no points" style="-f: #ff8cbe;" wrapText="true" BorderPane.alignment="CENTER" />
       </center>
+      <top>
+         <Label id="countDownLabel" fx:id="countDownLabel" text=" " textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
+         </Label>
+      </top>
    </BorderPane>
 </VBox>
