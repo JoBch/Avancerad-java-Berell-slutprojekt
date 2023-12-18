@@ -16,7 +16,6 @@ import java.util.ResourceBundle;
 import static org.example.testfirebase.Main.answer;
 import static org.example.testfirebase.Main.question;
 import static org.example.testfirebase.ReadAPI.readAPI;
-//import static org.example.testfirebase.HelloApplication.readAPI;
 
 public class Controller implements Initializable {
 
@@ -39,14 +38,11 @@ public class Controller implements Initializable {
     @FXML
     void onfalseButtonClick(ActionEvent event) {
         if (!answer) {
-            outputTextArea.appendText("\ncorrect");
-            //NÅGOT SOM STOPPAR NEDRÄKNINGEN
+            outputTextArea.appendText("\nCorrect");
         } else {
             outputTextArea.appendText("\nLOL FEL");
-            //NÅGOT SOM STOPPAR NEDRÄKNINGEN
-            countDown();
         }
-        outputTextArea.appendText("\nclick next question");
+        outputTextArea.appendText("\nClick next question");
         stopCountDown = true;
     }
 
@@ -57,21 +53,19 @@ public class Controller implements Initializable {
         stopCountDown = false;
         readAPI();
         countDown();
-        outputTextArea.setText(question);
         trueButton.setDisable(false);
         falseButton.setDisable(false);
+        outputTextArea.setText(question);
     }
 
     @FXML
     void ontrueButtonClick(ActionEvent event) {
         if (answer) {
-            outputTextArea.appendText("\ncorrect");
-            //NÅGOT SOM STOPPAR NEDRÄKNINGEN
+            outputTextArea.appendText("\nCorrect");
         } else {
             outputTextArea.appendText("\nLOL FEL");
-            //NÅGOT SOM STOPPAR NEDRÄKNINGEN
         }
-        outputTextArea.appendText("\nclick next question");
+        outputTextArea.appendText("\nClick next question");
         stopCountDown = true;
     }
 

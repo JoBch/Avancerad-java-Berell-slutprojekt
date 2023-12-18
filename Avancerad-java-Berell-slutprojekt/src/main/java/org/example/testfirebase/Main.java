@@ -22,7 +22,6 @@ public class Main extends Application {
     public static boolean answer;
     public static ObservableList<String[]> cBoxGameModeList = FXCollections.observableArrayList();
     public static Optional<String> result;
-
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
     }
