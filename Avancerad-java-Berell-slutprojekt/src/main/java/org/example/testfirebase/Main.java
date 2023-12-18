@@ -2,6 +2,7 @@ package org.example.testfirebase;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
@@ -19,8 +20,8 @@ public class Main extends Application {
     public static String medium = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
     public static String hard = "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
     public static boolean answer;
+    public static ObservableList<String[]> cBoxGameModeList = FXCollections.observableArrayList();
     public static Optional<String> result;
-    public static Thread countDownThread;
 
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
@@ -38,32 +39,16 @@ public class Main extends Application {
         //putRequest(result + ".json"); //This might work for putting info and username in firebase
         stage.show();
     }
+
     public void welcomeDialog() throws InterruptedException {
-        //Dialog with a confirmation request - use to input player name and start game after countdown 5 sec?
+        //Dialog with a confirmation request
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Text Input Dialog");
         dialog.setHeaderText("Look, a Text Input Dialog");
         dialog.setContentText("Please enter your name:");
 
-        // Traditional way to get the response value.
+        //Getting the response value
         result = dialog.showAndWait();
-        //Thread.sleep(0);//program pauses before continuing, no sleep in testing
         result.ifPresent(s -> System.out.println("Your name: " + s));
-    }
-    public static void countDown(){
-        countDownThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 10; i >= 0; i--) {
-                    System.out.println(i + " ");
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        });
-        countDownThread.start();
     }
 }
