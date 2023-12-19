@@ -1,5 +1,8 @@
 package org.example.quizAPI;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,9 +12,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//import static org.example.quizAPI.Player.getRequests;
 import static org.example.quizAPI.Player.patchRequest;
 import static org.example.quizAPI.ReadAPI.readAPI;
 
@@ -50,13 +58,12 @@ public class Controller extends Main implements Initializable {
     void onnextButtonClick(ActionEvent event) {
         nextButton.setText("Next Question");
         stopCountDown = false;
-        patchRequest(userName, correctAnswers);
+        //patchRequest(userName, correctAnswers);
         readAPI();
         countDown();
         trueButton.setDisable(false);
         falseButton.setDisable(false);
         outputTextArea.setText(question);
-        correctAnswers = 0;
     }
 
     @FXML
@@ -69,6 +76,11 @@ public class Controller extends Main implements Initializable {
         }
         outputTextArea.appendText("\nClick next question");
         stopCountDown = true;
+    }
+
+    @FXML
+    void onendButtonClick(ActionEvent event) {
+        endRound();
     }
 
     @Override
@@ -122,6 +134,70 @@ public class Controller extends Main implements Initializable {
             }
         });
         countDownThread.start();
+    }
+
+
+
+    public void getRequests(String databasePath) {
+        String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
+
+        try {
+
+            //Create the URL for the HTTP GET request
+            URL url = new URL(databaseUrl + databasePath);
+
+            //Open a connection to the URL
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            //Set the request method to GET
+            connection.setRequestMethod("GET");
+
+            //Get the response code t.ex 400, 404, 200 är ok
+            int responseCode = connection.getResponseCode();
+            // System.out.println("response code:" +responseCode);
+            if (responseCode == HttpURLConnection.HTTP_OK) { // ok är bra
+                //Read the response from the InputStream
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+
+                //Handle the response data
+                System.out.println("Response from Firebase Realtime Database:" + response);
+
+                String jsonString = String.valueOf(response);
+
+                //Using Gson to parse the JSON string
+                JsonObject jsonObject = new Gson().fromJson(jsonString, JsonObject.class);
+
+                //Iterating through keys and retrieving values dynamically
+                for (String key : jsonObject.keySet()) {
+                    JsonElement value = jsonObject.get(key);
+                    System.out.println(key + ": " + value);
+                    outputTextArea.appendText(key + ": " + value + "\n");
+                }
+
+            } else {
+                System.out.println("Error response code: " + responseCode);
+            }
+
+            // Close the connection
+            connection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void endRound() {
+        outputTextArea.clear();
+        outputTextArea.setText("Highscores:\n");
+        patchRequest(userName, correctAnswers);
+        getRequests("username.json");
+        correctAnswers = 0;
+        nextButton.setText("New Game");
     }
 }
 

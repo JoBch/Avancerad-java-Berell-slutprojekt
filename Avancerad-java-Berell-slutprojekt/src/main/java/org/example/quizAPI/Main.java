@@ -1,14 +1,19 @@
 package org.example.quizAPI;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Main extends Application {
+    public static String highScore;
+    @FXML
+    public static TextArea outputTextArea;
     public static String question;
     public static String databaseUrl;// = "https://opentdb.com/api.php?amount=1&type=boolean";
     public static String easy = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
