@@ -51,7 +51,7 @@ public class ReadAPI extends Main {
 
             //Get the response code t.ex 400, 404, 200 är ok
             int responseCode = connection.getResponseCode();
-            System.out.println("response code:" + responseCode);
+            System.out.println("response code API:" + responseCode);
             if (responseCode == HttpURLConnection.HTTP_OK) { // ok är bra
                 //Read the response from the InputStream
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -75,7 +75,7 @@ public class ReadAPI extends Main {
                     JsonObject firstResult = resultsArray.get(0).getAsJsonObject();
                     //Get the value associated with the "question" key from the first result
                     question = firstResult.get("question").getAsString();
-                    //To be able to display " and ' correctly display them
+                    //To be able to display special chars correctly
                     question = question.replaceAll("&quot;", "\"").replaceAll("&#039;", "'")
                             .replaceAll("&eacute;", "é").replaceAll("&rsquo;", "´");
                     //Get the value from correct_answer from the first result
@@ -86,12 +86,9 @@ public class ReadAPI extends Main {
                     System.out.println("No results found in the response.");
                 }
 
-                //Printing the full response form the API in console to know what it looks like
-                System.out.println(response);
-
             } else { //404 403 402 etc error koder
                 // Handle the error response
-                System.out.println("Error response code: " + responseCode);
+                System.out.println("Error response code API: " + responseCode);
             }
 
             // Close the connection

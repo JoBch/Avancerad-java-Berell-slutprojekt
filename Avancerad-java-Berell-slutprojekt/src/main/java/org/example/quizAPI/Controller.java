@@ -12,12 +12,11 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static org.example.quizAPI.Player.putRequest;
+import static org.example.quizAPI.Player.patchRequest;
 import static org.example.quizAPI.ReadAPI.readAPI;
 
 public class Controller extends Main implements Initializable {
 
-    //Number of correct answers, counts in true/false buttons - use it with firebase?
     public String[] items;
     boolean stopCountDown = false;
     @FXML
@@ -50,15 +49,14 @@ public class Controller extends Main implements Initializable {
     @FXML
     void onnextButtonClick(ActionEvent event) {
         nextButton.setText("Next Question");
-        //putRequest("person.json"); //Think we need it here to upload score to firebase?
         stopCountDown = false;
-        putRequest(userName + ".json");
+        patchRequest(userName, correctAnswers);
         readAPI();
         countDown();
         trueButton.setDisable(false);
         falseButton.setDisable(false);
         outputTextArea.setText(question);
-        System.out.println(correctAnswers);
+        correctAnswers = 0;
     }
 
     @FXML

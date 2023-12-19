@@ -1,54 +1,62 @@
 package org.example.quizAPI;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class Player extends Main {
 
-    public static HashMap<String, Integer> dataMap = new HashMap<>();
-
-    //Puts data in firebase by the help of the dataMap
-    public static void putRequest(String databasePath) {
+    //Puts a username into our firebase and patches existing usernames with new scores
+    public static void patchRequest(String userName, int correctAnswers) {
+        String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
+        String databasePath = "username";
 
         try {
-            String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/.json";
-            URL url = new URL(databaseUrl);
+            //Retrieve existing data from Firebase
+            HttpClient httpClient = HttpClient.newBuilder()
+                    .version(HttpClient.Version.HTTP_2)
+                    .build();
 
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            HttpRequest getRequest = HttpRequest.newBuilder()
+                    .uri(URI.create(databaseUrl + databasePath + ".json"))
+                    .GET()
+                    .build();
 
-            connection.setRequestMethod("PUT");
+            HttpResponse<String> getResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
 
-            connection.setDoOutput(true);
+            if (getResponse.statusCode() == 200) {
+                //If data exists, update the value
+                String existingData = getResponse.body();
+                JsonObject json = new Gson().fromJson(existingData, JsonObject.class);
 
-            connection.setRequestProperty("Content-Type", "application/json"); //typen
+                //Get the current value for the user
+                int currentValue = json.has(userName) ? json.get(userName).getAsInt() : 0;
 
-            dataMap.put(userName, correctAnswers);
+                //Calculate the updated value
+                int updatedValue = currentValue + correctAnswers;
 
-            String jsonInputString = new Gson().toJson(dataMap);
-            System.out.println(jsonInputString);
+                //Update the JSON object with the new value
+                json.addProperty(userName, updatedValue);
 
-            System.out.println(dataMap); //Just for trying
-            // Write the data to the output stream
-            try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
+                //Convert the updated JSON object to a string
+                String jsonInputString = new Gson().toJson(json);
+
+                //Perform PATCH request to update the value in Firebase
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(databaseUrl + databasePath + ".json"))
+                        .method("PATCH", HttpRequest.BodyPublishers.ofString(jsonInputString))
+                        .header("Content-Type", "application/json")
+                        .build();
+
+                HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                System.out.println(response);
+            } else {
+                System.out.println(getResponse);
             }
-
-            // Get the response code
-            int responseCode = connection.getResponseCode();
-
-            if (responseCode == HttpURLConnection.HTTP_OK)
-                System.out.println("PUT request successful");
-            else
-                System.out.println("Error response code: " + responseCode);
-
-            // Close the connection
-            connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
