@@ -14,30 +14,8 @@ public class ReadAPI extends Main {
 
     public static void readAPI() {
         //SwitchCase setText to choose difficulty
-        databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
-/*        switch (databaseUrl){
-            case data == "Easy": databaseUrl = easy;
-                break;
-            case "Medium": databaseUrl = medium;
-                break;
-            case "Hard": databaseUrl = hard;
-                break;
-            default:    System.out.println("Något gick fel");
-                break;
-        }*/
-/*        if (data.equals("Easy")){
-            databaseUrl = easy;
-            System.out.println("EASY");
-        } else if (data.equals("Medium")) {
-            databaseUrl = medium;
-            System.out.println("MEDIUM");
-        } else if (data.equals("Hard")) {
-            databaseUrl = hard;
-            System.out.println("HARD");
-        } else {
-            databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
-            System.out.println("Något gick fel");
-        }*/
+        //databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+
         String databasePath = "";
         try {
             //Create the URL for the HTTP GET request

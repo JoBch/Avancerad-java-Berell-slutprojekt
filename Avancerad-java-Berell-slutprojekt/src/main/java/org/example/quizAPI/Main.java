@@ -11,9 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-    public static String highScore;
-    @FXML
-    public static TextArea outputTextArea;
     public static String question;
     public static String databaseUrl;// = "https://opentdb.com/api.php?amount=1&type=boolean";
     public static String easy = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
@@ -22,6 +19,7 @@ public class Main extends Application {
     public static boolean answer;
     public static String userName;
     public static int correctAnswers = 0;
+    public static String [] items = new String[]{"Easy", "Medium", "Hard"};
 
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
@@ -33,9 +31,9 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 500, 300);
         stage.setTitle("Trivia Game");
         stage.setScene(scene);
-
         welcomeDialog();
         stage.show();
+
     }
 
     public void welcomeDialog() throws InterruptedException {

@@ -19,20 +19,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//import static org.example.quizAPI.Player.getRequests;
 import static org.example.quizAPI.Player.patchRequest;
 import static org.example.quizAPI.ReadAPI.readAPI;
 
 public class Controller extends Main implements Initializable {
 
-    public String[] items;
     boolean stopCountDown = false;
     @FXML
     private Label countDownLabel;
     @FXML
     private Button falseButton;
-    @FXML
-    private Label headLineLabel;
     @FXML
     private ComboBox<String> cBoxGameMode;
     @FXML
@@ -59,6 +55,34 @@ public class Controller extends Main implements Initializable {
         nextButton.setText("Next Question");
         stopCountDown = false;
         //patchRequest(userName, correctAnswers);
+        String value = cBoxGameMode.getValue();
+        try {
+            if (cBoxGameMode == null) {
+                System.out.println("Forgot to choose GAME MODE, Easy was chosen for you");
+            }
+            switch (value) {
+                case "Easy":
+                    databaseUrl = easy;
+                    break;
+                case "Medium":
+                    databaseUrl = medium;
+                    break;
+                case "Hard":
+                    databaseUrl = hard;
+                    break;
+                case null:
+                    databaseUrl = easy;
+                    System.out.println("Forgot to choose GAME MODE, Easy was chosen for you"); //denna skrivs ut vid fel
+                default:
+                    databaseUrl = easy;
+                    System.out.println("gick in i default");
+                    break;
+            }
+        } catch (NullPointerException exception) {
+            System.out.println(" ");
+
+        }
+
         readAPI();
         countDown();
         trueButton.setDisable(false);
@@ -85,24 +109,11 @@ public class Controller extends Main implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        items = new String[]{"Easy", "Medium", "Hard"};
+        //items = new String[]{"Easy", "Medium", "Hard"};
         cBoxGameMode.getItems().addAll(items);
-
         cBoxGameMode.setOnAction(event -> {
 
-            if (cBoxGameMode.toString().equals(items[0])) {
-                databaseUrl = easy;
-                System.out.println(databaseUrl + items[0]);
-            } else if (cBoxGameMode.toString().equals(items[1])) {
-                databaseUrl = medium;
-                System.out.println(databaseUrl + items[1]);
-            } else if (cBoxGameMode.toString().equals(items[2])) {
-                databaseUrl = hard;
-                System.out.println(databaseUrl + items[2]);
-            } else {
-                databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
-                System.out.println("Något gick fel");
-            }
+
         });
     }
 
@@ -110,12 +121,6 @@ public class Controller extends Main implements Initializable {
         Thread countDownThread = new Thread(new Runnable() {
             @Override
             public void run() {
-
-                /*If you're running a task on a background thread and need to update a JavaFX UI component
-                 (like a label, button text, etc.), you should use Platform.runLater() to ensure that the UI updates occur
-                 on the JavaFX Application Thread. This is because JavaFX UI components should only be modified from this
-                 dedicated UI thread to avoid concurrency issues and ensure thread safety in the UI.*/
-
                 for (int i = 10; i >= 0; i--) {
                     if (stopCountDown) {
                         break;
@@ -135,8 +140,6 @@ public class Controller extends Main implements Initializable {
         });
         countDownThread.start();
     }
-
-
 
     public void getRequests(String databasePath) {
         String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -191,6 +194,7 @@ public class Controller extends Main implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void endRound() {
         outputTextArea.clear();
         outputTextArea.setText("Highscores:\n");
