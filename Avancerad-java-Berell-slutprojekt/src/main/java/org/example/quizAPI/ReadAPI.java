@@ -13,9 +13,6 @@ import java.net.URL;
 public class ReadAPI extends Main {
 
     public static void readAPI() {
-        //SwitchCase setText to choose difficulty
-        //databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
-
         String databasePath = "";
         try {
             //Create the URL for the HTTP GET request
