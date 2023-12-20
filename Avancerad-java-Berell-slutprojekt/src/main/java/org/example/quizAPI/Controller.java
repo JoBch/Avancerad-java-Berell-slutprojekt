@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static org.example.quizAPI.Player.patchRequest;
-import static org.example.quizAPI.ReadAPI.readAPI;
+import static org.example.quizAPI.ReadAPIBackup.readAPIBackup;
 
 public class Controller extends Main implements Initializable {
 
@@ -53,6 +53,7 @@ public class Controller extends Main implements Initializable {
     @FXML
     void onnextButtonClick(ActionEvent event) {
         nextButton.setText("Next Question");
+        cBoxGameMode.setDisable(true);
         stopCountDown = false;
         String value = cBoxGameMode.getValue();
         try {
@@ -71,7 +72,7 @@ public class Controller extends Main implements Initializable {
                     break;
                 case null:
                     databaseUrl = easy;
-                    System.out.println("Forgot to choose GAME MODE, Easy was chosen for you"); //denna skrivs ut vid fel
+                    System.out.println("Forgot to choose GAME MODE, Easy was chosen for you");
                 default:
                     databaseUrl = easy;
                     System.out.println("Gick in i default");
@@ -80,7 +81,7 @@ public class Controller extends Main implements Initializable {
         } catch (NullPointerException exception) {
             System.out.println(" ");
         }
-        readAPI();
+        readAPIBackup();
         countDown();
         trueButton.setDisable(false);
         falseButton.setDisable(false);
@@ -100,13 +101,13 @@ public class Controller extends Main implements Initializable {
     }
 
     @FXML
-    void onendButtonClick(ActionEvent event) throws InterruptedException {
+    void onendButtonClick(ActionEvent event) {
         endRound();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cBoxGameMode.getItems().addAll(items);
+        cBoxGameMode.getItems().addAll(gameModes);
         cBoxGameMode.setOnAction(event -> {
         });
     }
@@ -178,9 +179,10 @@ public class Controller extends Main implements Initializable {
         }
     }
 
-    private void endRound() throws InterruptedException {
-        outputTextArea.clear(); //
+    private void endRound() {
+        outputTextArea.clear();
         outputTextArea.setText("Highscores:\n");
+        cBoxGameMode.setDisable(false);
         patchRequest(userName, correctAnswers);
         getRequests("username.json");
         correctAnswers = 0;

@@ -10,11 +10,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ReadAPI extends Main {
+public class ReadAPIBackup extends Main {
 
-    public static void readAPI() {
+    public static void readAPIBackup() {
+        //Hardcoded URL as it is a backup and will override some functions in the program
+        databaseUrl = "https://beta-trivia.bongobot.io/?search=cat&category=entertainment&type=boolean&difficulty=easy&limit=1";
+
         String databasePath = "";
-
         try {
             //Create the URL for the HTTP GET request
             URL url = new URL(databaseUrl + databasePath);
@@ -39,14 +41,13 @@ public class ReadAPI extends Main {
 
                 //Parsing our API
                 JsonParser parser = new JsonParser();
-                JsonObject root = parser.parse(response.toString()).getAsJsonObject();
-
                 //Making the response from API into a jsonarray named resultsArray, so we can later extract what we need from the array
-                JsonArray resultsArray = root.getAsJsonArray("results");
+                JsonArray responseArray = parser.parse(response.toString()).getAsJsonArray();
+
                 //If results array exists and has a size bigger than 0 - mostly error handling
-                if (resultsArray != null && !resultsArray.isEmpty()) {
+                if (!responseArray.isJsonNull() && !responseArray.isEmpty()) {
                     //Retrieve the first element from the results array
-                    JsonObject firstResult = resultsArray.get(0).getAsJsonObject();
+                    JsonObject firstResult = responseArray.get(0).getAsJsonObject();
                     //Get the value associated with the "question" key from the first result
                     question = firstResult.get("question").getAsString();
                     //To be able to display special chars correctly
@@ -67,4 +68,5 @@ public class ReadAPI extends Main {
             e.printStackTrace();
         }
     }
+
 }

@@ -7,7 +7,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class Player extends Main {
+public class Player extends Controller {
     //Puts a username into our firebase and patches existing usernames with new scores
     public static void patchRequest(String userName, int correctAnswers) {
         String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
