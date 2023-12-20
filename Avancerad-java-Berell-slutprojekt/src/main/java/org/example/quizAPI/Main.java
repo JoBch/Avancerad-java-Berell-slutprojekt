@@ -17,7 +17,7 @@ public class Main extends Application {
     public static boolean answer;
     public static String userName;
     public static int correctAnswers = 0;
-    public static String [] items = new String[]{"Easy", "Medium", "Hard"};
+    public static String[] items = new String[]{"Easy", "Medium", "Hard"};
 
     public static void main(String[] args) {
         launch(); //Launches our JavaFX
