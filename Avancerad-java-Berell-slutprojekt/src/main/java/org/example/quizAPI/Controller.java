@@ -44,7 +44,7 @@ public class Controller extends Main implements Initializable {
             correctAnswers++;
             outputTextArea.appendText("\nCorrect");
         } else {
-            outputTextArea.appendText("\nLOL FEL");
+            outputTextArea.appendText("\nYOU'RE WRONG");
         }
         outputTextArea.appendText("\nClick next question");
         stopCountDown = true;
@@ -54,7 +54,6 @@ public class Controller extends Main implements Initializable {
     void onnextButtonClick(ActionEvent event) {
         nextButton.setText("Next Question");
         stopCountDown = false;
-        //patchRequest(userName, correctAnswers);
         String value = cBoxGameMode.getValue();
         try {
             if (cBoxGameMode == null) {
@@ -75,14 +74,12 @@ public class Controller extends Main implements Initializable {
                     System.out.println("Forgot to choose GAME MODE, Easy was chosen for you"); //denna skrivs ut vid fel
                 default:
                     databaseUrl = easy;
-                    System.out.println("gick in i default");
+                    System.out.println("Gick in i default");
                     break;
             }
         } catch (NullPointerException exception) {
             System.out.println(" ");
-
         }
-
         readAPI();
         countDown();
         trueButton.setDisable(false);
@@ -96,7 +93,7 @@ public class Controller extends Main implements Initializable {
             correctAnswers++;
             outputTextArea.appendText("\nCorrect");
         } else {
-            outputTextArea.appendText("\nLOL FEL");
+            outputTextArea.appendText("\nYOU'RE WRONG");
         }
         outputTextArea.appendText("\nClick next question");
         stopCountDown = true;
@@ -109,11 +106,8 @@ public class Controller extends Main implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //items = new String[]{"Easy", "Medium", "Hard"};
         cBoxGameMode.getItems().addAll(items);
         cBoxGameMode.setOnAction(event -> {
-
-
         });
     }
 
@@ -143,22 +137,17 @@ public class Controller extends Main implements Initializable {
 
     public void getRequests(String databasePath) {
         String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
-
         try {
-
             //Create the URL for the HTTP GET request
             URL url = new URL(databaseUrl + databasePath);
 
             //Open a connection to the URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            //Set the request method to GET
             connection.setRequestMethod("GET");
 
-            //Get the response code t.ex 400, 404, 200 är ok
+            //Get the http response code
             int responseCode = connection.getResponseCode();
-            // System.out.println("response code:" +responseCode);
-            if (responseCode == HttpURLConnection.HTTP_OK) { // ok är bra
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 //Read the response from the InputStream
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String line;
@@ -169,18 +158,13 @@ public class Controller extends Main implements Initializable {
                 }
                 reader.close();
 
-                //Handle the response data
-                System.out.println("Response from Firebase Realtime Database:" + response);
-
-                String jsonString = String.valueOf(response);
-
                 //Using Gson to parse the JSON string
+                String jsonString = String.valueOf(response);
                 JsonObject jsonObject = new Gson().fromJson(jsonString, JsonObject.class);
 
                 //Iterating through keys and retrieving values dynamically
                 for (String key : jsonObject.keySet()) {
                     JsonElement value = jsonObject.get(key);
-                    System.out.println(key + ": " + value);
                     outputTextArea.appendText(key + ": " + value + "\n");
                 }
 
@@ -188,7 +172,6 @@ public class Controller extends Main implements Initializable {
                 System.out.println("Error response code: " + responseCode);
             }
 
-            // Close the connection
             connection.disconnect();
         } catch (IOException e) {
             e.printStackTrace();
@@ -204,4 +187,3 @@ public class Controller extends Main implements Initializable {
         nextButton.setText("New Game");
     }
 }
-

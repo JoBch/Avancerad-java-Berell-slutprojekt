@@ -13,8 +13,6 @@ import java.net.URL;
 public class ReadAPI extends Main {
 
     public static void readAPI() {
-        //SwitchCase setText to choose difficulty
-        //databaseUrl = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
 
         String databasePath = "";
         try {
@@ -23,14 +21,12 @@ public class ReadAPI extends Main {
 
             //Open a connection to the URL
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            //Set the request method to GET
             connection.setRequestMethod("GET");
 
-            //Get the response code t.ex 400, 404, 200 är ok
+            //Get the http response code
             int responseCode = connection.getResponseCode();
             System.out.println("response code API:" + responseCode);
-            if (responseCode == HttpURLConnection.HTTP_OK) { // ok är bra
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 //Read the response from the InputStream
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String line;
@@ -64,12 +60,11 @@ public class ReadAPI extends Main {
                     System.out.println("No results found in the response.");
                 }
 
-            } else { //404 403 402 etc error koder
+            } else {
                 // Handle the error response
                 System.out.println("Error response code API: " + responseCode);
             }
 
-            // Close the connection
             connection.disconnect();
         } catch (IOException e) {
             e.printStackTrace();

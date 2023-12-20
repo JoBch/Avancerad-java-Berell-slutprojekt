@@ -8,7 +8,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class Player extends Main {
-
     //Puts a username into our firebase and patches existing usernames with new scores
     public static void patchRequest(String userName, int correctAnswers) {
         String databaseUrl = "https://testjb-b8fac-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -32,10 +31,8 @@ public class Player extends Main {
                 String existingData = getResponse.body();
                 JsonObject json = new Gson().fromJson(existingData, JsonObject.class);
 
-                //Get the current value for the user
+                //Get the current value for the user and calculate the updated value
                 int currentValue = json.has(userName) ? json.get(userName).getAsInt() : 0;
-
-                //Calculate the updated value
                 int updatedValue = currentValue + correctAnswers;
 
                 //Update the JSON object with the new value

@@ -1,10 +1,8 @@
 package org.example.quizAPI;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
@@ -12,7 +10,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     public static String question;
-    public static String databaseUrl;// = "https://opentdb.com/api.php?amount=1&type=boolean";
+    public static String databaseUrl;
     public static String easy = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
     public static String medium = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
     public static String hard = "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
@@ -33,7 +31,6 @@ public class Main extends Application {
         stage.setScene(scene);
         welcomeDialog();
         stage.show();
-
     }
 
     public void welcomeDialog() throws InterruptedException {
