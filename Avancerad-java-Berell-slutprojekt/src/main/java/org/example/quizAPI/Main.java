@@ -12,6 +12,7 @@ public class Main extends Application {
     public static String question;
     public static String databaseUrl;
     public static String easy = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+    //BACKUP BACKUP ROLLIN https://beta-trivia.bongobot.io/?search=cat&category=entertainment&type=boolean&difficulty=easy&limit=1
     public static String medium = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
     public static String hard = "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
     public static boolean answer;
