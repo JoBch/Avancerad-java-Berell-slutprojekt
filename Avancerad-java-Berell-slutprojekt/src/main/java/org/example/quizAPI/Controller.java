@@ -100,7 +100,7 @@ public class Controller extends Main implements Initializable {
     }
 
     @FXML
-    void onendButtonClick(ActionEvent event) {
+    void onendButtonClick(ActionEvent event) throws InterruptedException {
         endRound();
     }
 
@@ -178,12 +178,13 @@ public class Controller extends Main implements Initializable {
         }
     }
 
-    private void endRound() {
-        outputTextArea.clear();
+    private void endRound() throws InterruptedException {
+        outputTextArea.clear(); //
         outputTextArea.setText("Highscores:\n");
         patchRequest(userName, correctAnswers);
         getRequests("username.json");
         correctAnswers = 0;
         nextButton.setText("New Game");
+        welcomeDialog();
     }
 }
