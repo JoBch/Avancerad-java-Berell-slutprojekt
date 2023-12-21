@@ -81,6 +81,7 @@ public class Controller extends Main implements Initializable {
         } catch (NullPointerException exception) {
             System.out.println(" ");
         }
+        System.out.println(answer);
         readAPIBackup();
         countDown();
         trueButton.setDisable(false);

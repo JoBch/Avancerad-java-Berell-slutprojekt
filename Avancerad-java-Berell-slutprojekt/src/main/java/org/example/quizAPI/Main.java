@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**********************************
+ * Authors: Joel Bech & Andreas Jabrell (Grupp 1)
+ * Berell© Studios 2023
+**********************************/
 public class Main extends Application {
     public static String question;
     public static String databaseUrl;
