@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static org.example.quizAPI.Player.patchRequest;
-import static org.example.quizAPI.ReadAPIBackup.readAPIBackup;
+import static org.example.quizAPI.ReadAPI.readAPI;
 
 public class Controller extends Main implements Initializable {
 
@@ -81,8 +81,8 @@ public class Controller extends Main implements Initializable {
         } catch (NullPointerException exception) {
             System.out.println(" ");
         }
-        System.out.println(answer);
-        readAPIBackup();
+        System.out.println(databaseUrl);
+        readAPI();
         countDown();
         trueButton.setDisable(false);
         falseButton.setDisable(false);

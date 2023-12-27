@@ -11,13 +11,13 @@ import java.io.IOException;
 /**********************************
  * Authors: Joel Bech & Andreas Jabrell (Grupp 1)
  * Berell© Studios 2023
-**********************************/
+ **********************************/
 public class Main extends Application {
     public static String question;
     public static String databaseUrl;
-    public static String easy = "https://beta-trivia.bongobot.io/?search=cat&category=entertainment&type=boolean&difficulty=easy&limit=1"; //"https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
-    public static String medium = "https://beta-trivia.bongobot.io/?search=cat&category=entertainment&type=boolean&difficulty=medium&limit=1"; //"https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
-    public static String hard = "https://beta-trivia.bongobot.io/?search=cat&category=entertainment&type=boolean&difficulty=hard&limit=1"; //"https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
+    public static String easy = "https://opentdb.com/api.php?amount=1&difficulty=easy&type=boolean";
+    public static String medium = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
+    public static String hard = "https://opentdb.com/api.php?amount=1&difficulty=hard&type=boolean";
     public static boolean answer;
     public static String userName;
     public static int correctAnswers = 0;
@@ -39,12 +39,16 @@ public class Main extends Application {
 
     public void welcomeDialog() {
         //Dialog with a confirmation request
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Quiz1");
-        dialog.setHeaderText("Welcome to Quiz1 !");
-        dialog.setContentText("Please enter your name:");
+        try {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Quiz1");
+            dialog.setHeaderText("Welcome to Quiz1 !");
+            dialog.setContentText("Please enter your name:");
+            //Getting the response value
+            userName = String.valueOf(dialog.showAndWait()).split("\\[")[1].split("\\]")[0];
+        }catch (Exception e){
+            welcomeDialog();
+        }
 
-        //Getting the response value
-        userName = String.valueOf(dialog.showAndWait()).split("\\[")[1].split("\\]")[0];
     }
 }
